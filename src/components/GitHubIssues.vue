@@ -14,23 +14,28 @@
             class="form-control"
             placeholder="github username"
           />
+          <!-- {{ username }} -->
         </div>
       </div>
 
       <div class="col">
         <div class="form-group">
           <input
+            v-model="repository"
             type="text"
             class="form-control"
             placeholder="github repositório"
           />
+          <!-- {{ repository }} -->
         </div>
       </div>
 
       <div class="col-3">
         <div class="form-group">
           <button class="btn btn-success">GO</button>
-          <button class="btn btn-danger">LIMPAR</button>
+          <button v-on:click.prevent.stop="reset()" class="btn btn-danger">
+            LIMPAR
+          </button>
         </div>
       </div>
     </div>
@@ -74,9 +79,17 @@
 export default {
   name: "GitHubIssues",
   data() {
-    return {};
+    return {
+      username: "",
+      repository: "",
+    };
   },
-  methods: {},
+  methods: {
+    reset() {
+      this.username = "";
+      this.repository = "";
+    },
+  },
 };
 </script>
 
