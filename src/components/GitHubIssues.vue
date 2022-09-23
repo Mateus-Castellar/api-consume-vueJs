@@ -55,21 +55,12 @@
       </thead>
 
       <tbody>
-        <tr>
-          <td class="text-center" colspan="2">
-            <!-- <img src="/static/loading.svg" alt="" /> -->
-          </td>
+        <tr v-for="issue in issuesList" :key="issue.number">
+          <td>{{ issue.number }}</td>
+          <td>{{ issue.title }}</td>
         </tr>
 
-        <tr>
-          <td>
-            <router-link> </router-link>
-          </td>
-
-          <td></td>
-        </tr>
-
-        <tr>
+        <tr v-if="issuesList.data == 0">
           <td class="text-center" colspan="2">Nenhuma issue encontrada!</td>
         </tr>
       </tbody>
@@ -85,6 +76,7 @@ export default {
     return {
       username: "",
       repository: "",
+      issuesList: [],
     };
   },
   methods: {
@@ -97,6 +89,7 @@ export default {
 
       axios.get(urlApi).then((response) => {
         console.log(response);
+        this.issuesList = response.data;
       });
     },
   },
