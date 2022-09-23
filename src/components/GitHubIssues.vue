@@ -32,7 +32,9 @@
 
       <div class="col-3">
         <div class="form-group">
-          <button class="btn btn-success">GO</button>
+          <button v-on:click.prevent.stop="getIssues()" class="btn btn-success">
+            GO
+          </button>
           <button v-on:click.prevent.stop="reset()" class="btn btn-danger">
             LIMPAR
           </button>
@@ -76,6 +78,7 @@
 </template>
 
 <script>
+import axios from "axios";
 export default {
   name: "GitHubIssues",
   data() {
@@ -88,6 +91,13 @@ export default {
     reset() {
       this.username = "";
       this.repository = "";
+    },
+    getIssues() {
+      const urlApi = `https://api.github.com/repos/${this.username}/${this.repository}/issues`;
+
+      axios.get(urlApi).then((response) => {
+        console.log(response);
+      });
     },
   },
 };
