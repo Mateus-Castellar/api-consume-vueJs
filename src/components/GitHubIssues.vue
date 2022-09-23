@@ -8,24 +8,14 @@
     <div class="row">
       <div class="col">
         <div class="form-group">
-          <input
-            v-model="username"
-            type="text"
-            class="form-control"
-            placeholder="github username"
-          />
+          <input v-model="username" type="text" class="form-control" placeholder="github username" />
           <!-- {{ username }} -->
         </div>
       </div>
 
       <div class="col">
         <div class="form-group">
-          <input
-            v-model="repository"
-            type="text"
-            class="form-control"
-            placeholder="github repositório"
-          />
+          <input v-model="repository" type="text" class="form-control" placeholder="github repositório" />
           <!-- {{ repository }} -->
         </div>
       </div>
@@ -33,10 +23,10 @@
       <div class="col-3">
         <div class="form-group">
           <button v-on:click.prevent.stop="getIssues()" class="btn btn-success">
-            GO
+            buscar
           </button>
           <button v-on:click.prevent.stop="reset()" class="btn btn-danger">
-            LIMPAR
+            limpar
           </button>
         </div>
       </div>
@@ -60,7 +50,7 @@
           <td>{{ issue.title }}</td>
         </tr>
 
-        <tr v-if="issuesList.data == 0">
+        <tr v-if="issuesList.length == 0">
           <td class="text-center" colspan="2">Nenhuma issue encontrada!</td>
         </tr>
       </tbody>
@@ -83,6 +73,7 @@ export default {
     reset() {
       this.username = "";
       this.repository = "";
+      this.issuesList = [];
     },
     getIssues() {
       const urlApi = `https://api.github.com/repos/${this.username}/${this.repository}/issues`;
@@ -97,4 +88,5 @@ export default {
 </script>
 
 <style>
+
 </style>
